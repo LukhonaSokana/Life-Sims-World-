@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Sims World</title>
+<style>
+body{font-family:Arial;background:#f5f5f5;text-align:center;padding:30px}
+.card{background:white;max-width:500px;margin:auto;padding:20px;border-radius:15px}
+input,select,button{width:90%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
+button{background:black;color:white;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🌍 Life Sims World</h1>
+<p>Only for the game</p>
+
+<h3>1) Character Creation</h3>
+<input placeholder="Character Name">
+<select><option>Male</option><option>Female</option></select>
+<select><option>South Africa</option><option>USA</option><option>UK</option></select>
+
+<h3>2) Sign-up / Login</h3>
+<input placeholder="Username">
+<input placeholder="Email">
+<input type="password" placeholder="Password">
+<button>START LIFE</button>
+
+<h3>3) Feedback / Bug Report</h3>
+<input placeholder="Describe bug or idea...">
+<button>Submit Report</button>
+</div>
+</body>
+</html>
