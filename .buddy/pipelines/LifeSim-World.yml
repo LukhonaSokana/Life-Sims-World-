@@ -2,6 +2,11 @@
   name: LifeSim World
   refs:
   - refs/heads/main
+  always_from_scratch: true
+  auto_clear_cache: true
+  fetch_lfs: true
   fail_on_prepare_env_warning: true
+  do_not_create_commit_status: true
   events:
   - type: WEBHOOK
+  docker_build_cache: WORKSPACE
