@@ -1,35 +1,106 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Sims World</title>
-<style>
-body{font-family:Arial;background:#f5f5f5;text-align:center;padding:30px}
-.card{background:white;max-width:500px;margin:auto;padding:20px;border-radius:15px}
-input,select,button{width:90%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
-button{background:black;color:white;font-weight:bold}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>LifeSim World — LSW</title>
+  <meta name="description" content="L.S.W — LifeSim World: 21 countries, local currencies & laws, 366 jobs, 1,123+ need-backed items, 1,045+ suppliers, 7-step innovation labs, court & jail, and multi-generational legacy." />
+  <meta property="og:title" content="LifeSim World — LSW" />
+  <meta property="og:description" content="No sign up. No login. Just start your life in LifeSim World." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="card">
-<h1>🌍 Life Sims World</h1>
-<p>Only for the game</p>
+<body class="loading">
+  <!-- 3-Ellipse Fullscreen Starter Loader -->
+  <div id="loaderOverlay" class="loader-overlay" role="status" aria-live="polite">
+    <div class="loader-stage">
+      <div class="ellipse ellipse-1" aria-hidden="true">
+        <span class="e-dot e-dot-1"></span>
+        <span class="e-dot e-dot-2"></span>
+        <span class="e-dot e-dot-3"></span>
+      </div>
+      <div class="ellipse ellipse-2" aria-hidden="true">
+        <span class="e-dot e-dot-1"></span>
+        <span class="e-dot e-dot-2"></span>
+        <span class="e-dot e-dot-3"></span>
+      </div>
+      <div class="ellipse ellipse-3" aria-hidden="true">
+        <span class="e-dot e-dot-1"></span>
+        <span class="e-dot e-dot-2"></span>
+        <span class="e-dot e-dot-3"></span>
+      </div>
+      <div class="loader-brand">
+        <div class="loader-logo">L.S.W</div>
+        <div class="loader-sub">LIFESIM WORLD</div>
+      </div>
+    </div>
+    <div class="loader-status-wrap">
+      <div id="loaderMsg" class="loader-msg">Loading Your World</div>
+      <div class="loader-bar-track">
+        <div id="loaderBarFill" class="loader-bar-fill"></div>
+      </div>
+      <div id="loaderPct" class="loader-pct">0%</div>
+    </div>
+  </div>
 
-<h3>1) Character Creation</h3>
-<input placeholder="Character Name">
-<select><option>Male</option><option>Female</option></select>
-<select><option>South Africa</option><option>USA</option><option>UK</option></select>
+  <!-- Startup Character Creation Screen (No login, no signup) -->
+  <section id="startupScreen" class="startup-screen hidden">
+    <div class="wrap">
+      <div class="card hero-start-card">
+        <div class="brand-title-lg">L.S.W</div>
+        <div class="brand-subtitle">LIFESIM WORLD</div>
+        <p class="startup-tagline">No sign up. No login. Just start your life.</p>
+        <div id="startupBody"></div>
+      </div>
+    </div>
+  </section>
 
-<h3>2) Sign-up / Login</h3>
-<input placeholder="Username">
-<input placeholder="Email">
-<input type="password" placeholder="Password">
-<button>START LIFE</button>
+  <!-- Sticky Topbar -->
+  <header id="topHud" class="topbar hidden">
+    <div class="topbar-inner">
+      <div class="topbar-row">
+        <div class="topbar-left">
+          <div id="hudLine1" class="topbar-name">Player</div>
+          <div id="hudLine2" class="topbar-meta">Age 0 · City, Country</div>
+        </div>
+        <div class="topbar-right">
+          <div id="hudCash" class="topbar-cash">R0</div>
+          <div id="hudEnergy" class="topbar-energy">Energy: 100</div>
+        </div>
+      </div>
+      <div class="topbar-tools">
+        <input id="globalSearchInput" class="hud-search-input" type="search" placeholder="🔍 Search items, jobs, laws, countries..." oninput="LSW.setGlobalSearch(this.value)" onfocus="LSW.openSearchPanel()" />
+        <button class="hud-ico-btn" type="button" title="Voice Search" onclick="LSW.startVoiceSearch()">🎤</button>
+        <button class="hud-ico-btn" type="button" title="Monthly Report" onclick="LSW.openReportModal()">📊</button>
+        <button class="hud-ico-btn" type="button" title="World Settings & Themes" onclick="LSW.openWorldSettings()">⚙️</button>
+      </div>
+      <div id="hudTopPills" class="pill-strip"></div>
+      <div id="hudSubPills" class="pill-strip"></div>
+      <div id="globalSearchPanel" class="search-dropdown hidden"></div>
+    </div>
+  </header>
 
-<h3>3) Feedback / Bug Report</h3>
-<input placeholder="Describe bug or idea...">
-<button>Submit Report</button>
-</div>
+  <!-- Main Viewport -->
+  <main id="appShell" class="wrap hidden">
+    <div id="mainContent"></div>
+  </main>
+
+  <!-- Fixed 6-Button Bottom Nav -->
+  <nav id="bottomNav" class="bottom-nav hidden" aria-label="Main Navigation">
+    <button class="bnav-btn active" type="button" data-tab="home" onclick="LSW.switchTab('home')"><span class="ico">🏠</span><span>Home</span></button>
+    <button class="bnav-btn" type="button" data-tab="people" onclick="LSW.switchTab('people')"><span class="ico">👥</span><span>People</span></button>
+    <button class="bnav-btn" type="button" data-tab="work" onclick="LSW.switchTab('work')"><span class="ico">💼</span><span>Work</span></button>
+    <button class="bnav-btn" type="button" data-tab="finance" onclick="LSW.switchTab('finance')"><span class="ico">💰</span><span>Finance</span></button>
+    <button class="bnav-btn" type="button" data-tab="life" onclick="LSW.switchTab('life')"><span class="ico">🧬</span><span>Life</span></button>
+    <button class="bnav-btn" type="button" data-tab="world" onclick="LSW.switchTab('world')"><span class="ico">🌍</span><span>World</span></button>
+  </nav>
+
+  <!-- Reusable Modal & Toast -->
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div id="modalBox" class="modal-box"></div>
+  </div>
+  <div id="toastBox" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>

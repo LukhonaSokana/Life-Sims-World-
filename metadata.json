@@ -1,0 +1,6 @@
+{
+  "name": "LifeSim World",
+  "description": "A complete single-file mobile-first life simulator game combining careers, hobbies, Swipe for Love dating, businesses, investments, crime, lawsuits, and generational legacies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
