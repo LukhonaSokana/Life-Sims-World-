@@ -6377,3 +6377,31 @@
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js');
 }
+// ===== BRAND DISCLAIMER - ONCE-OFF POP + SETTINGS =====
+
+// 1. Show popup ONCE after Home Screen
+function checkBrandPopup() {
+  const hasSeen = localStorage.getItem("hasSeenBrandDisclaimer");
+  if (!hasSeen) {
+    document.getElementById("brandPopup").style.display = "block";
+  }
+}
+
+// 2. Close popup and remember - never show again automatically
+function closeBrandPopup() {
+  document.getElementById("brandPopup").style.display = "none";
+  localStorage.setItem("hasSeenBrandDisclaimer", "yes");
+  // Now start the game
+  if (typeof startGame === "function") {
+    startGame();
+  }
+}
+
+// 3. Open from SETTINGS anytime
+function openBrandDisclaimerFromSettings() {
+  document.getElementById("brandPopup").style.display = "block";
+}
+
+// 4. Call this AFTER Home Screen button is pressed
+// Example: In your Home Screen START button, do this:
+// <button onclick="checkBrandPopup()">START GAME</button>
